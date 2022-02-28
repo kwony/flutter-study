@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './listview.dart';
+import './listview_expanded.dart';
 import './container.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const ContainerPage(title: 'Flutter Demo Home Page'),
+      home: const ListViewExpandedPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
