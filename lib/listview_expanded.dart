@@ -75,16 +75,16 @@ class _ListViewExampleState extends State<ListViewExpandedPage> {
                             Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
                         color: Colors.deepOrange,
-                        child: const Align(
+                        child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Text("bottomLeft"),
                         ),
                       ),
                       Container(
                         color: Colors.blueAccent,
-                        child: const Align(
+                        child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text("abc"),
+                          child: Text(entries[index]),
                         ),
                       ),
                     ]))
