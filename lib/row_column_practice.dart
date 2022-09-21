@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 // https://api.flutter.dev/flutter/widgets/ListView-class.html
 
 class RowColumnPracticePage extends StatefulWidget {
-  const RowColumnPracticePage({Key? key, required this.title}) : super(key: key);
+  const RowColumnPracticePage({Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
@@ -29,11 +30,10 @@ class _RowColumnPracticePage extends State<RowColumnPracticePage> {
                 children: [
                   Container(color: Colors.blue, width: 50),
                   Flexible(
-                    flex: 100,
+                      flex: 100,
                       child: Container(
-                    color: Colors.red,
-
-                  )),
+                        color: Colors.red,
+                      )),
                 ],
               ))),
     );
