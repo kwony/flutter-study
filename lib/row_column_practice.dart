@@ -24,16 +24,16 @@ class _RowColumnPracticePage extends State<RowColumnPracticePage> {
           alignment: Alignment.topLeft,
           child: Container(
               height: 100,
-              color: Colors.white,
+              color: Colors.black,
               child: Row(
                 children: [
                   Container(color: Colors.blue, width: 50),
                   Flexible(
+                    flex: 100,
                       child: Container(
                     color: Colors.red,
-                    width: 50,
+
                   )),
-                  const Text("Expanded Study"),
                 ],
               ))),
     );
