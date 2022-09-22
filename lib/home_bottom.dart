@@ -33,8 +33,27 @@ class _HomePractice extends State<HomePractice> {
           children: [
             Expanded(
                 child: Container(
-              color: Colors.red,
-            )),
+                  constraints: const BoxConstraints.expand(),
+                  color: Colors.red,
+                  child: ListView(
+                    children: [
+                      const Text("1234"),
+                      const Text("1234"),
+                      const Text("1234"),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        color: Colors.blue,
+                        child: Image.asset("assets/images/ic_close.png"),
+                      ),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        color: Colors.blue,
+                        child: Image.network(
+                            'https://picsum.photos/250?image=9'),
+                      ),
+                    ],
+                  ),
+                )),
             Container(
               height: 100,
               color: Colors.black,
@@ -56,10 +75,10 @@ class _HomePractice extends State<HomePractice> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('23kjdfjkdf $_counter'),
+                            Text('$_counter'),
                             Container(
                               color: Colors.purple,
-                              width: 100,
+                              width: 50,
                               height: 50,
                             )
                           ],
@@ -67,9 +86,6 @@ class _HomePractice extends State<HomePractice> {
                       )),
                   Flexible(
                     flex: 1,
-                    // child: Container(
-                    //   color: Colors.orange,
-                    // )
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -78,24 +94,49 @@ class _HomePractice extends State<HomePractice> {
                           height: 100,
                         ),
                         Positioned(
-                            child: Container(
-                                color: Colors.blue,
-                                width: 50,
-                                height: 50,
-                                alignment: Alignment.bottomCenter))
+                            child: Image.asset("assets/images/ic_close.png"))
                       ],
                     ),
                   ),
                   Flexible(
                       flex: 1,
                       child: Container(
+                        constraints: const BoxConstraints.expand(),
                         color: Colors.cyanAccent,
+                        child: Text('1234'),
                       )),
+                  Flexible(
+                      child: Container(
+                        constraints: const BoxConstraints.expand(),
+                        color: Colors.green,
+                        child: const MyInfoContainer(),
+                      )
+                  ),
                 ],
               ),
             )
           ],
         ));
+  }
+}
+
+class MyInfoContainer extends StatelessWidget {
+  const MyInfoContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      color: Colors.green,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/ic_close.png"),
+          const Text("내정보"),
+        ],
+      ),
+    )
   }
 }
 
