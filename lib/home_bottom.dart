@@ -33,122 +33,149 @@ class _HomePractice extends State<HomePractice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-                child: Container(
-              constraints: const BoxConstraints.expand(),
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
               color: Colors.red,
               child: ListView(
-                children: [
+                  children: [
                   const Text("1234"),
-                  const Text("1234"),
-                  const Text("1234"),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    color: Colors.blue,
-                    child: Image.asset("assets/images/ic_close.png"),
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    color: Colors.blue,
-                    child: Image.network('https://picsum.photos/250?image=9'),
-                  ),
-                  GestureDetector(
-                    onTap: () => {
-                      setState(() {
-                        toggle = !toggle;
-                      })
-                    },
-                    child: _getToggleChild(),
-                  ),
-                  GestureDetector(
-                    onTap: () => {Navigator.of(context).pushNamed('/a')},
-                    child: Container(
-                      color: Colors.green,
-                      child: const Align(
-                        child:  Text(
-                          "다음장으로",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.purple, fontSize: 30),
-                        ),
-                        alignment: Alignment.center,
-                      ),
-                    ),
-                  )
-                ],
+              const Text("1234"),
+              const Text("1234"),
+              Container(
+                alignment: Alignment.topCenter,
+                color: Colors.blue,
+                child: Image.asset("assets/images/ic_close.png"),
               ),
-            )),
-            Container(
-              height: 100,
-              color: Colors.black,
-              child: Row(
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: GestureDetector(
-                        onTap: click,
-                        child: Container(
-                          color: Colors.indigo,
-                        )),
-                  ),
-                  Flexible(
-                      flex: 1,
-                      child: Container(
-                        color: Colors.blueGrey,
-                        height: 100,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('$_counter'),
-                            Container(
-                              color: Colors.purple,
-                              width: 50,
-                              height: 50,
-                            )
-                          ],
-                        ),
-                      )),
-                  Flexible(
-                    flex: 1,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          color: Colors.pink,
-                          height: 100,
-                        ),
-                        Positioned(
-                            child: Image.asset("assets/images/ic_close.png"))
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                      flex: 1,
-                      child: Container(
-                        constraints: const BoxConstraints.expand(),
-                        color: Colors.cyanAccent,
-                        child: Text('1234'),
-                      )),
-                  Flexible(
-                      child: Container(
-                    constraints: const BoxConstraints.expand(),
-                    color: Colors.green,
-                    child: const MyInfoContainer(
-                      title: '내정보',
-                    ),
-                  )),
-                ],
+              Container(
+                alignment: Alignment.topCenter,
+                color: Colors.blue,
+                child: Image.network('https://picsum.photos/250?image=9'),
               ),
-            )
-          ],
-        ));
+              GestureDetector(
+                onTap: () =>
+                {
+                  setState(() {
+                    toggle = !toggle;
+                  })
+                },
+                child: _getToggleChild(),
+              ),
+              GestureDetector(
+                onTap: () => {Navigator.of(context).pushNamed('/a')},
+                child: Container(
+                  color: Colors.green,
+                  child: const Align(
+                    child: Text(
+                      "다음장으로",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.purple, fontSize: 30),
+                    ),
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ),
+              Container(
+                child: Row(
+                    children: [
+                Stack(
+                children: [
+                Container(
+                decoration: const BoxDecoration(
+                    color: Colors.orange,
+                    shape: BoxShape.circle
+                ),
+                width: 60,
+                height: 60,
+                child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(
+                        "assets/images/test_seulgi.png", width: 40, height: 40),
+                  ),
+
+                ),
+              ),
+
+            ],
+          ),
+        ],
+      ),
+    )],
+    ),
+    )),
+    Container(
+    height: 100,
+    color: Colors.black,
+    child: Row(
+    children: [
+    Flexible(
+    flex: 1,
+    child: GestureDetector(
+    onTap: click,
+    child: Container(
+    color: Colors.indigo,
+    )),
+    ),
+    Flexible(
+    flex: 1,
+    child: Container(
+    color: Colors.blueGrey,
+    height: 100,
+    child: Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Text('$_counter'),
+    Container(
+    color: Colors.purple,
+    width: 50,
+    height: 50,
+    )
+    ],
+    ),
+    )),
+    Flexible(
+    flex: 1,
+    child: Stack(
+    alignment: Alignment.center,
+    children: [
+    Container(
+    color: Colors.pink,
+    height: 100,
+    ),
+    Positioned(
+    child: Image.asset("assets/images/ic_close.png"))
+    ],
+    ),
+    ),
+    Flexible(
+    flex: 1,
+    child: Container(
+    constraints: const BoxConstraints.expand(),
+    color: Colors.cyanAccent,
+    child: Text('1234'),
+    )),
+    Flexible(
+    child: Container(
+    constraints: const BoxConstraints.expand(),
+    color: Colors.green,
+    child: const MyInfoContainer(
+    title: '내정보',
+    ),
+    )),
+    ],
+    ),
+    )
+    ],
+    ));
   }
 }
 
