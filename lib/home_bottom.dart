@@ -109,7 +109,7 @@ class _HomePractice extends State<HomePractice> {
                       child: Container(
                         constraints: const BoxConstraints.expand(),
                         color: Colors.green,
-                        child: const MyInfoContainer(),
+                        child: const MyInfoContainer(title: '내정보',),
                       )
                   ),
                 ],
@@ -121,7 +121,10 @@ class _HomePractice extends State<HomePractice> {
 }
 
 class MyInfoContainer extends StatelessWidget {
-  const MyInfoContainer({Key? key}) : super(key: key);
+
+  final String title;
+
+  const MyInfoContainer({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +136,10 @@ class MyInfoContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset("assets/images/ic_close.png"),
-          const Text("내정보"),
+          Text(title),
         ],
       ),
-    )
+    );
   }
 }
 
