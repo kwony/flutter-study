@@ -14,11 +14,20 @@ class HomePractice extends StatefulWidget {
 
 class _HomePractice extends State<HomePractice> {
   int _counter = 0;
+  bool toggle = true;
 
   void click() {
     setState(() {
       _counter++;
     });
+  }
+
+  _getToggleChild() {
+    if (toggle) {
+      return const Text('Toggle True');
+    } else {
+      return const Text('Toggle False');
+    }
   }
 
   @override
@@ -33,27 +42,48 @@ class _HomePractice extends State<HomePractice> {
           children: [
             Expanded(
                 child: Container(
-                  constraints: const BoxConstraints.expand(),
-                  color: Colors.red,
-                  child: ListView(
-                    children: [
-                      const Text("1234"),
-                      const Text("1234"),
-                      const Text("1234"),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        color: Colors.blue,
-                        child: Image.asset("assets/images/ic_close.png"),
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        color: Colors.blue,
-                        child: Image.network(
-                            'https://picsum.photos/250?image=9'),
-                      ),
-                    ],
+              constraints: const BoxConstraints.expand(),
+              color: Colors.red,
+              child: ListView(
+                children: [
+                  const Text("1234"),
+                  const Text("1234"),
+                  const Text("1234"),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    color: Colors.blue,
+                    child: Image.asset("assets/images/ic_close.png"),
                   ),
-                )),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    color: Colors.blue,
+                    child: Image.network('https://picsum.photos/250?image=9'),
+                  ),
+                  GestureDetector(
+                    onTap: () => {
+                      setState(() {
+                        toggle = !toggle;
+                      })
+                    },
+                    child: _getToggleChild(),
+                  ),
+                  GestureDetector(
+                    onTap: () => {Navigator.of(context).pushNamed('/a')},
+                    child: Container(
+                      color: Colors.green,
+                      child: const Align(
+                        child:  Text(
+                          "다음장으로",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.purple, fontSize: 30),
+                        ),
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )),
             Container(
               height: 100,
               color: Colors.black,
@@ -74,6 +104,7 @@ class _HomePractice extends State<HomePractice> {
                         height: 100,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('$_counter'),
                             Container(
@@ -107,11 +138,12 @@ class _HomePractice extends State<HomePractice> {
                       )),
                   Flexible(
                       child: Container(
-                        constraints: const BoxConstraints.expand(),
-                        color: Colors.green,
-                        child: const MyInfoContainer(title: '내정보',),
-                      )
-                  ),
+                    constraints: const BoxConstraints.expand(),
+                    color: Colors.green,
+                    child: const MyInfoContainer(
+                      title: '내정보',
+                    ),
+                  )),
                 ],
               ),
             )
@@ -121,7 +153,6 @@ class _HomePractice extends State<HomePractice> {
 }
 
 class MyInfoContainer extends StatelessWidget {
-
   final String title;
 
   const MyInfoContainer({Key? key, required this.title}) : super(key: key);
