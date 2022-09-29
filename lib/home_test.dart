@@ -1,5 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:developer' as developer;
+
+class Album {
+  final int userId;
+  final int id;
+  final String title;
+
+  const Album({
+    required this.userId,
+    required this.id,
+    required this.title,
+  });
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+    );
+  }
+}
+
+Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
 
 class HomeTest extends StatefulWidget {
   @override
@@ -7,8 +48,11 @@ class HomeTest extends StatefulWidget {
 }
 
 class _HomeTest extends State<HomeTest> {
+
   @override
   Widget build(BuildContext context) {
+    developer.log('build called');
+
     return Scaffold(
       appBar: null,
       body: Column(
@@ -19,7 +63,7 @@ class _HomeTest extends State<HomeTest> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   height: 140,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
@@ -32,6 +76,17 @@ class _HomeTest extends State<HomeTest> {
               ],
             )
           ),
+          FutureBuilder(
+            future: futureAlbum,
+            builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text((snapshot.data! as Album).title);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const CircularProgressIndicator();
+          }, ),
+
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(left: 15, right: 15),
@@ -76,5 +131,14 @@ class _HomeTest extends State<HomeTest> {
         ],
       ),
     );
+  }
+
+  late Future<Album> futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+
+    futureAlbum = fetchAlbum();
   }
 }
