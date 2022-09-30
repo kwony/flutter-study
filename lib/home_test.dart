@@ -97,13 +97,18 @@ class _HomeTest extends State<HomeTest> {
             ),
             child: Container(
               padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-              child: const Text(
-                '도전하기',
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    textBaseline: TextBaseline.ideographic),
-              ),
+              child: GestureDetector(
+                onTap: () => {
+                  Navigator.of(context).pushNamed('/b')
+                },
+                child: const Text(
+                  '도전하기',
+                  style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      textBaseline: TextBaseline.ideographic),
+                ),
+              )
             ),
           ),
           Container(

@@ -67,7 +67,7 @@ class _HomePractice extends State<HomePractice> {
                     child: _getToggleChild(),
                   ),
                   GestureDetector(
-                    onTap: () => {Navigator.of(context).pushNamed('/a')},
+                    onTap: () => { Navigator.of(context).pushNamed('/a') },
                     child: Container(
                       color: Colors.green,
                       child: const Align(

@@ -5,6 +5,7 @@ import './container.dart';
 import './row_column_practice.dart';
 import './home_bottom.dart';
 import './home_test.dart';
+import './question_container.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: <String, WidgetBuilder> {
-        '/a': (BuildContext context) => HomeTest()
+        '/a': (BuildContext context) => HomeTest(),
+        '/b': (BuildContext context) => QuestionContainer()
       },
       theme: ThemeData(
         // This is the theme of your application.
