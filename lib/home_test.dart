@@ -66,9 +66,8 @@ class _HomeTest extends State<HomeTest> {
                 SizedBox(
                   height: 140,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
-                      "assets/images/test_seulgi.png",
+                      "assets/images/home_logo.png",
                       fit: BoxFit.cover,
                     ),
                   ),
