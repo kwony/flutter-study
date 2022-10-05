@@ -25,10 +25,11 @@ class Quiz {
 class QuizContent {
   final String? question;
   final List<QuizAnswer> answerList;
-
+  final String? mediaPath;
 
   const QuizContent({required this.question,
-    required this.answerList});
+    required this.answerList,
+    this.mediaPath});
 
   factory QuizContent.fromJson(Map<String, dynamic> json) => _$QuizContentFromJson(json);
 

@@ -29,12 +29,14 @@ QuizContent _$QuizContentFromJson(Map<String, dynamic> json) => QuizContent(
       answerList: (json['answerList'] as List<dynamic>)
           .map((e) => QuizAnswer.fromJson(e as Map<String, dynamic>))
           .toList(),
+      mediaPath: json['mediaPath'] as String?,
     );
 
 Map<String, dynamic> _$QuizContentToJson(QuizContent instance) =>
     <String, dynamic>{
       'question': instance.question,
       'answerList': instance.answerList,
+      'mediaPath': instance.mediaPath,
     };
 
 QuizAnswer _$QuizAnswerFromJson(Map<String, dynamic> json) => QuizAnswer(

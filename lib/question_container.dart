@@ -21,7 +21,6 @@ class QuestionContainer extends StatefulWidget {
 }
 
 FutureBuilder<ResponseData> _buildBody(BuildContext context) {
-
   final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
 
   return FutureBuilder<ResponseData>(
@@ -46,31 +45,32 @@ FutureBuilder<ResponseData> _buildBody(BuildContext context) {
   );
 }
 
-// FutureBuilder<Quiz> buildQuizBody(BuildContext context) {
-//   final quizRepo = QuizRepository();
-//
-//   return FutureBuilder(builder: builder)
-// }
-
 class _QuestionContainer extends State<QuestionContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: Column(
-          children: [
-            Text("data"),
-            QuestionPage(question: "question"),
-            FutureBuilder<Quiz>(future: fetchQuiz(), builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final quiz = snapshot.data!;
-                return Text(quiz.quizContent!.question!);
-              } else {
-                return const CircularProgressIndicator();
-              }
-            }),
-            _buildBody(context)
-          ],
+        body: Container(
+          width: double.infinity,
+          color: const Color(0xffFFF9E4),
+          child: Column(
+            // crossAxisAlignment: Alignment.center,
+            children: [
+              FutureBuilder<Quiz>(
+                  future: fetchQuiz(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final quiz = snapshot.data!;
+                      return QuestionPage(
+                        quiz: quiz,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  }),
+              // _buildBody(context)
+            ],
+          ),
         ));
   }
 
@@ -84,28 +84,64 @@ class _QuestionContainer extends State<QuestionContainer> {
   }
 }
 
-
 Future<Quiz> fetchQuiz() {
   QuizRepository repo = QuizRepository();
 
-  return repo.getQuiz(81).then((value) => value.quiz);
+  return repo.getQuiz(227).then((value) => value.quiz);
 }
 
 class QuestionPage extends StatelessWidget {
-  final String question;
+  final Quiz quiz;
 
-  const QuestionPage({Key? key, required this.question}) : super(key: key);
+  const QuestionPage({Key? key, required this.quiz}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    final levelText = quiz.level == 1 ? "EASY" : "HARD";
+
+    final quizLevel = Text(quiz.level == 1 ? "EASY" : "HARD", style: TextStyle(
+      color: quiz.level == 1 ? Colors.blue : Colors.red,
+      fontWeight: FontWeight.w700,
+      fontSize: 16
+    ),);
+
     return Container(
-      color: Colors.green,
+      width: double.infinity,
+      padding:
+          const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 15, right: 15),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset("assets/images/ic_close.png"),
-          Text(question),
+          Row(
+            children: [
+              Flexible(child: Row(
+                children: [
+                  quizLevel
+                ],
+              ), flex: 1,),
+              Flexible(child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("123"),
+                  Text("456"),
+                ],
+              ), flex: 1,)
+            ],
+          ),
+          Container(
+            width: double.infinity,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0), color: Colors.black),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                quiz.quizContent!.question!,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+              )),
         ],
       ),
     );
