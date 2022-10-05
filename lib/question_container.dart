@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_study/retrofit/data.dart';
+import 'package:flutter_study/retrofit/rest_client.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -71,6 +74,32 @@ class QuizAnswer {
   }
 }
 
+FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+
+  final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+
+  return FutureBuilder<ResponseData>(
+    future: client.getUsers(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        final ResponseData posts = snapshot.data!;
+
+        var name = "";
+
+        posts.data?.forEach((element) {
+          User user = User.fromJson(element);
+          name += "${user.name}\n";
+          developer.log("name: ${user.name}, email: ${user.email}");
+        });
+
+        return Text(name);
+      } else {
+        return const CircularProgressIndicator();
+      }
+    },
+  );
+}
+
 class _QuestionContainer extends State<QuestionContainer> {
   @override
   Widget build(BuildContext context) {
@@ -86,7 +115,8 @@ class _QuestionContainer extends State<QuestionContainer> {
               } else {
                 return const CircularProgressIndicator();
               }
-            })
+            }),
+            _buildBody(context)
           ],
         ));
   }
@@ -102,6 +132,7 @@ class _QuestionContainer extends State<QuestionContainer> {
     futureQuiz = fetchQuiz();
   }
 }
+
 
 class Response {
   final int code;
@@ -136,13 +167,6 @@ Future<String> fetchQuiz() async {
   developer.log(res.result.toString());
 
   return response.toString();
-  // log("response: " + response.toString());
-  //
-  // if (response.statusCode == 200) {
-  //   return Quiz.fromJson(jsonDecode(response.body));
-  // } else {
-  //   throw Exception('Failed to load album');
-  // }
 }
 
 class QuestionPage extends StatelessWidget {
