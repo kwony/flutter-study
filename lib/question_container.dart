@@ -61,14 +61,10 @@ class _QuestionContainer extends State<QuestionContainer> {
           children: [
             Text("data"),
             QuestionPage(question: "question"),
-            FutureBuilder<QuizResponse>(future: fetchQuiz(), builder: (context, snapshot) {
+            FutureBuilder<Quiz>(future: fetchQuiz(), builder: (context, snapshot) {
               if (snapshot.hasData) {
-                developer.log("quiz response " + snapshot.data!.code.toString());
-                developer.log("quiz resp message " + snapshot.data!.result.toString());
-
-                final quizResp = QuizResp.fromJson(snapshot.data!.result);
-
-                return Text(quizResp.quiz.answer!);
+                final quiz = snapshot.data!;
+                return Text(quiz.quizContent!.question!);
               } else {
                 return const CircularProgressIndicator();
               }
@@ -89,10 +85,10 @@ class _QuestionContainer extends State<QuestionContainer> {
 }
 
 
-Future<QuizResponse> fetchQuiz() {
+Future<Quiz> fetchQuiz() {
   QuizRepository repo = QuizRepository();
 
-  return repo.getQuiz(81);
+  return repo.getQuiz(81).then((value) => value.quiz);
 }
 
 class QuestionPage extends StatelessWidget {

@@ -6,7 +6,7 @@ import "package:flutter_study/retrofit/rest_question_client.dart";
 class QuizRepository {
   QuizApiClient apiClient = QuizApiClient(Dio());
 
-  Future<QuizResponse> getQuiz(int quizId) {
-    return apiClient.getQuiz(quizId);
+  Future<QuizResp> getQuiz(int quizId) {
+    return apiClient.getQuiz(quizId).then((value) => QuizResp.fromJson(value.result));
   }
 }
