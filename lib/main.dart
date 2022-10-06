@@ -6,9 +6,32 @@ import './row_column_practice.dart';
 import './home_bottom.dart';
 import './home_test.dart';
 import './question_container.dart';
+import './bloc/counter_app.dart';
 
-void main() {
-  runApp(const MyApp());
+Stream<int> countStream(int max) async* {
+  for (int i = 0; i < max; i++) {
+    yield i;
+  }
+}
+
+Future<int> sumStream(Stream<int> stream) async {
+  int sum = 0;
+  await for (int value in stream) {
+    sum += value;
+  }
+  return sum;
+}
+
+void main() async {
+
+  Stream<int> stream = countStream(10);
+  int sum = await sumStream(stream);
+
+  print(sum);
+
+
+  runApp(CounterApp());
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
