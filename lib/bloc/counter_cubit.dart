@@ -1,7 +1,15 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_study/bloc/counter.dart';
 
-class CounterCubit extends Cubit<int> {
-  CounterCubit() : super(0);
+abstract class CounterEvent {}
+class CounterIncrPressed extends CounterEvent {}
+class CounterDecrPressed extends CounterEvent {}
+
+class CounterCubit extends Bloc<CounterEvent, int> {
+  CounterCubit() : super(0) {
+    on<CounterIncrPressed>((event, emit) => emit(state + 1));
+    on<CounterDecrPressed>((event, emit) => emit(state - 1));
+  }
 
 
   @override
@@ -10,7 +18,4 @@ class CounterCubit extends Cubit<int> {
     print(change);
   }
 
-  void increment() => emit(state + 1);
-
-  void decrement() => emit(state - 1);
 }
